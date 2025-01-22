@@ -1,0 +1,131 @@
+#include <iostream>
+#include <queue>
+#include <stack>
+#include <vector>
+ 
+using namespace std;
+ 
+// Kelas untuk merepresentasikan graf
+class Graf {
+private:
+    int vertices;  // Jumlah simpul (vertices) dalam graf
+    vector<vector<int> > adjacencyList;  // List adjacency untuk menyimpan sisi-sisi graf
+ 
+public:
+    // Konstruktor untuk membuat graf dengan jumlah simpul v
+    Graf(int v) : vertices(v), adjacencyList(v + 1) {}
+ 
+    // Fungsi untuk menambah sisi (edge) antara dua simpul v dan w
+    void tambahSisi(int v, int w) {
+        adjacencyList[v].push_back(w);  // Menambahkan sisi v -> w
+        adjacencyList[w].push_back(v);  // Menambahkan sisi w -> v untuk graf tak berarah
+    }
+ 
+    // Fungsi untuk melakukan traversal BFS (Breadth-First Search)
+    void BFS(int mulai) {
+        // Membuat vektor untuk melacak simpul yang sudah dikunjungi
+        vector<bool> dikunjungi(vertices + 1, false);
+        queue<int> q;  // Antrian untuk BFS
+        q.push(mulai);  // Menambahkan simpul awal ke dalam antrian
+        dikunjungi[mulai] = true;  // Menandai simpul awal sebagai sudah dikunjungi
+ 
+        // Selama antrian tidak kosong
+        while (!q.empty()) {
+            int saatIni = q.front();  // Mengambil simpul yang ada di depan antrian
+            cout << saatIni << " ";    // Mencetak simpul saat ini
+            q.pop();  // Mengeluarkan simpul dari antrian
+ 
+            // Menelusuri tetangga-tetangga dari simpul saat ini
+            for (vector<int>::iterator it = adjacencyList[saatIni].begin(); it != adjacencyList[saatIni].end(); ++it) {
+                int tetangga = *it;  // Mendapatkan tetangga dari simpul saat ini
+                if (!dikunjungi[tetangga]) {  // Jika tetangga belum dikunjungi
+                    q.push(tetangga);  // Menambahkan tetangga ke dalam antrian
+                    dikunjungi[tetangga] = true;  // Menandai tetangga sebagai sudah dikunjungi
+                }
+            }
+        }
+    }
+ 
+    // Fungsi untuk melakukan traversal DFS (Depth-First Search)
+    void DFS(int mulai) {
+        // Membuat vektor untuk melacak simpul yang sudah dikunjungi
+        vector<bool> dikunjungi(vertices + 1, false);
+        stack<int> s;  // Tumpukan untuk DFS
+        s.push(mulai);  // Menambahkan simpul awal ke dalam tumpukan
+ 
+        // Selama tumpukan tidak kosong
+        while (!s.empty()) {
+            int saatIni = s.top();  // Mendapatkan simpul yang ada di atas tumpukan
+            s.pop();  // Mengeluarkan simpul dari tumpukan
+ 
+            if (!dikunjungi[saatIni]) {  // Jika simpul belum dikunjungi
+                cout << saatIni << " ";  // Mencetak simpul saat ini
+                dikunjungi[saatIni] = true;  // Menandai simpul saat ini sebagai sudah dikunjungi
+            }
+ 
+            // Menelusuri tetangga-tetangga dari simpul saat ini (dengan urutan terbalik)
+            for (vector<int>::reverse_iterator it = adjacencyList[saatIni].rbegin(); it != adjacencyList[saatIni].rend(); ++it) {
+                int tetangga = *it;  // Mendapatkan tetangga dari simpul saat ini
+                if (!dikunjungi[tetangga]) {  // Jika tetangga belum dikunjungi
+                    s.push(tetangga);  // Menambahkan tetangga ke dalam tumpukan
+                }
+            }
+        }
+    }
+};
+ 
+int main() {
+    int vertices, edges;
+    
+    // Meminta input jumlah simpul dan sisi dari pengguna
+    cout << "Masukkan jumlah simpul: ";
+    cin >> vertices;
+    Graf graf(vertices);  // Membuat objek graf dengan jumlah simpul yang dimasukkan
+ 
+    cout << "Masukkan jumlah sisi: ";
+    cin >> edges;
+ 
+    cout << "Masukkan sisi-sisi (format: sumber tujuan):" << endl;
+    // Meminta input sisi-sisi dan menambahkannya ke dalam graf
+    for (int i = 0; i < edges; ++i) {
+        int sumber, tujuan;
+        cin >> sumber >> tujuan;
+        graf.tambahSisi(sumber, tujuan);  // Menambahkan sisi ke dalam graf
+    }
+ 
+    int pilihan;
+    // Menampilkan menu untuk memilih antara BFS, DFS, atau keluar
+    do {
+        cout << "\nMenu:\n1. Breadth-First Search (BFS)\n2. Depth-First Search (DFS)\n0. Keluar\nMasukkan pilihan: ";
+        cin >> pilihan;
+ 
+        switch (pilihan) {
+            case 1:  // Pilihan untuk menjalankan BFS
+                cout << "Masukkan simpul awal untuk BFS: ";
+                int bfsMulai;
+                cin >> bfsMulai;
+                cout << "Hasil traversal BFS: ";
+                graf.BFS(bfsMulai);  // Menjalankan BFS dari simpul yang dipilih
+                cout << endl;
+                break;
+ 
+            case 2:  // Pilihan untuk menjalankan DFS
+                cout << "Masukkan simpul awal untuk DFS: ";
+                int dfsMulai;
+                cin >> dfsMulai;
+                cout << "Hasil traversal DFS: ";
+                graf.DFS(dfsMulai);  // Menjalankan DFS dari simpul yang dipilih
+                cout << endl;
+                break;
+ 
+            case 0:  // Pilihan untuk keluar dari program
+                cout << "Keluar dari program. Selamat tinggal!\n";
+                break;
+ 
+            default:  // Jika input pilihan tidak valid
+                cout << "Pilihan tidak valid. Harap masukkan opsi yang benar.\n";
+        }
+    } while (pilihan != 0);  // Mengulang hingga pengguna memilih untuk keluar
+ 
+    return 0;  // Mengembalikan nilai 0 untuk menandakan program selesai
+}
