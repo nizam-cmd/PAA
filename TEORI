@@ -1,0 +1,74 @@
+1.	Jelaskan apa itu algoritma greedy? (10 Point)
+Algoritma greedy adalah metode pemrograman yang menyelesaikan masalah dengan cara memilih solusi terbaik yang tampak pada setiap langkahnya tanpa mempertimbangkan keputusan di masa mendatang.
+
+2.	Sebutkan keuntungan dan kekurangan dari algoritma DNC (5 Point)
+Keuntungan :
+•	Penyederhanaan Masalah:
+Algoritma DNC membagi masalah besar menjadi submasalah yang lebih kecil dan lebih sederhana untuk dipecahkan, sehingga lebih mudah untuk dianalisis dan diselesaikan.
+•	Penerapan Paralelisme:
+Submasalah yang dihasilkan sering kali dapat diselesaikan secara paralel, sehingga meningkatkan efisiensi ketika diterapkan pada sistem dengan kemampuan komputasi paralel.
+•	Reusabilitas Solusi Submasalah:
+Jika ada submasalah yang sama muncul kembali, solusinya dapat digunakan kembali, seperti yang diterapkan dalam algoritma Dynamic Programming yang merupakan turunan dari DNC.
+•	Cocok untuk Struktur Rekursif:
+Banyak masalah yang memiliki sifat rekursif, seperti pengurutan atau pencarian, dapat diselesaikan secara alami dengan pendekatan DNC.
+•	Efisiensi pada Masalah Tertentu:
+Algoritma DNC sering kali memberikan waktu komputasi yang optimal untuk masalah besar, seperti merge sort, quick sort, atau binary search, dibandingkan dengan metode iteratif murni.
+
+Kekurangan Algoritma Divide and Conquer (DNC):
+•	Overhead Rekursi:
+Pendekatan rekursif dalam DNC dapat menyebabkan overhead yang signifikan, seperti penggunaan memori untuk tumpukan pemanggilan rekursi dan pengelolaan parameter.
+•	Kelebihan Pemrosesan untuk Submasalah:
+Jika masalah tidak terstruktur dengan baik, membagi masalah menjadi terlalu banyak submasalah dapat meningkatkan waktu komputasi secara keseluruhan.
+•	Tidak Efisien untuk Masalah Kecil:
+Algoritma DNC mungkin menjadi tidak efisien jika digunakan pada masalah dengan ukuran kecil, karena overhead pembagian masalah lebih besar daripada keuntungan yang diperoleh.
+•	Kebutuhan Ruang Tambahan:
+Beberapa algoritma DNC, seperti merge sort, membutuhkan ruang tambahan yang signifikan untuk menampung data sementara selama proses penggabungan.
+•	Kesulitan Implementasi:
+Untuk beberapa masalah, merancang solusi dengan algoritma DNC bisa lebih kompleks dibandingkan pendekatan langsung, terutama jika pembagian masalah dan penggabungan solusinya tidak intuitif.
+
+3.	Sebutkan kelebihan dan kekurangan DFS dan BFS (30 point)
+DFS 
+Kelebihan:
+1.	Efisiensi Memori:
+DFS hanya menyimpan simpul pada jalur yang sedang dieksplorasi dalam stack, sehingga lebih hemat memori dibandingkan BFS.
+2.	Cepat Menemukan Jalur Dalam:
+DFS sangat cocok untuk masalah yang membutuhkan eksplorasi mendalam, seperti pencarian solusi hingga kedalaman tertentu.
+3.	Penerapan Mudah dengan Rekursi:
+DFS sering kali lebih sederhana untuk diimplementasikan menggunakan teknik rekursi.
+4.	Cocok untuk Masalah yang Memerlukan Semua Jalur:
+DFS digunakan untuk pencarian jalur atau solusi kombinatorial, seperti masalah pencarian Hamiltonian atau solusi teka-teki.
+5.	Efisien pada Graf Jarang:
+DFS lebih efektif untuk graf yang jarang karena tidak perlu menjelajahi semua simpul di setiap level.
+Kekurangan:
+1.	Tidak Optimal:
+DFS tidak selalu menemukan solusi optimal, terutama jika simpul yang dicari terletak di dekat simpul awal tetapi pada cabang yang berbeda.
+2.	Berisiko Terjebak pada Siklus:
+Tanpa penanganan eksplisit untuk siklus (misalnya, dengan daftar simpul yang telah dikunjungi), DFS bisa memasuki loop tak terbatas pada graf berarah atau tidak berarah.
+3.	Sensitif terhadap Kedalaman:
+DFS dapat gagal atau menghasilkan error (stack overflow) jika kedalamannya terlalu besar.
+4.	Tidak Menjamin Solusi Terbaik:
+DFS hanya memastikan pencarian selesai jika semua jalur dieksplorasi, tetapi solusi optimal tidak dijamin.
+
+BFS
+Kelebihan:
+1.	Menemukan Solusi Optimal (Shortest Path):
+BFS memastikan solusi optimal pada graf tak berbobot karena eksplorasi dilakukan berdasarkan level atau kedalaman simpul.
+2.	Tidak Terjebak pada Siklus:
+Dengan penggunaan daftar simpul yang telah dikunjungi, BFS tidak akan terjebak dalam loop.
+3.	Sesuai untuk Masalah dengan Solusi Dekat:
+BFS lebih efisien dalam menemukan simpul yang dekat dengan simpul awal.
+4.	Cocok untuk Graf dengan Banyak Cabang:
+BFS mengeksplorasi semua simpul pada satu level sebelum melangkah ke level berikutnya, sehingga ideal untuk masalah dengan cabang yang luas.
+5.	Memastikan Semua Solusi Terlihat:
+BFS menjamin eksplorasi semua simpul, sehingga cocok untuk masalah seperti enumerasi simpul.
+Kekurangan:
+1.	Penggunaan Memori yang Besar:
+BFS membutuhkan banyak ruang untuk menyimpan semua simpul pada level saat ini dan berikutnya, terutama pada graf yang lebar.
+2.	Waktu Eksekusi Lambat pada Jalur Dalam:
+BFS kurang efisien untuk masalah yang membutuhkan eksplorasi jalur yang dalam karena menjelajahi semua level sebelum mencapai kedalaman tertentu.
+3.	Tidak Efisien pada Graf Besar:
+Pada graf yang sangat besar, BFS dapat menjadi sangat lambat karena harus menjelajahi semua simpul di setiap level sebelum bergerak lebih dalam.
+4.	Kompleksitas Implementasi Lebih Tinggi:
+Implementasi BFS lebih kompleks dibandingkan DFS karena memerlukan antrian eksplisit untuk menyimpan simpul yang akan dieksplorasi.
+5.	Tidak Cocok untuk Masalah yang Memerlukan Kedalaman Maksimal:
+BFS tidak efisien jika solusi berada jauh di dalam graf karena perlu menjelajahi semua level sebelumnya terlebih dahulu.
